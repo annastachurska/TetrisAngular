@@ -1,23 +1,26 @@
 .finishedGame {
+    box-sizing: border-box;
     width: 100vw;
     height: 100vh;
-    display: block;
     background-color: yellow;
-    // background-image: url("../img/20707_funny_ants_playing_tetris.jpg");
-    // background-repeat: no-repeat;
-    // background-size: cover;
-    position: relative;
+    padding-top: 10vh;
+    background-image: url("../../../assets/img/20707_funny_ants_playing_tetris.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .finishedGame_container{
     border: 5px solid #2D5B0F;
-    position: absolute;
-    top: 10%;
-    left: 33%;
+    margin: 0 auto;
     border-radius: 25px;
     width: 50vw;
     height: 80vh;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+
 }
 
 .finishedGame_header{
@@ -34,12 +37,6 @@
         text-shadow: 0 0 0 yellow;}
     100% {font-size: 40px;
         text-shadow: 0 0 10px yellow;}
-}
-
-.finishedGame_text_container{
-    position: absolute;
-    top: 19%;
-    left: 5%;
 }
 
 .finishedGame_points, .finishedGame_text_middle{
