@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-setting',
@@ -14,7 +15,7 @@ export class SettingComponent implements OnInit {
     height: new FormControl('', [Validators.required, Validators.min(10), Validators.max(20)])
   });
 
-  constructor() { }
+  constructor(private router: Router ) { }
 
   ngOnInit() {
   }
@@ -22,5 +23,6 @@ export class SettingComponent implements OnInit {
   onSubmit(boardSize: any) {
     SettingComponent.width = boardSize.width;
     SettingComponent.height = boardSize.height;
+    this.router.navigate(['game']);
   }
 }

@@ -5,16 +5,12 @@ import { SettingComponent } from './setting/setting.component';
 
 const routes: Routes = [
   {
-    path: 'welcome',
-    component: WelcomeComponent
-  },
-  {
     path: 'start',
     component: SettingComponent
   },
   {
     path: '',
-    redirectTo: 'welcome',
+    component: WelcomeComponent,
     pathMatch: 'full'
   },
 ];

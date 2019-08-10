@@ -1,3 +1,25 @@
-<p>
-  tetris works!
-</p>
+<section class="tetrisContainer">
+  <section class="tetrisLeft">
+    <div class="tetris_header">
+      <h2 class="tetris_points">Points: {{gameState?.points}}</h2>
+    </div>
+    <div class="tetris_button_container">
+      <h2 class="tetris_button_container_title">Magic buttons</h2>
+      <button class="tetris_button tetris_rotate"
+        (click)="handleRotateButton()">{{isRotateBtnClicked ? 'Tetris rotated' : 'Rotate tetris'}}</button>
+      <button class="tetris_button tetris_keys"
+        (click)="handleChageKeysButton()">{{isSwitchedSideKeys ? 'Sides are switched' : 'Switch sides'}}</button>
+      <button [disabled]="slowDownTimesToUse === 0" class="tetris_button tetris_slowDown"
+        (click)="handleSlowDownButton()">Slow down</button>
+    </div>
+    <div class="tetrisInfo">
+      <p class="tetrisInfo_text">
+        {{gameState && gameState.elementNumber===8 ? 'THE BOMB is falling. When it will reeach the surface it will detonate
+         destroying everything in radius of 1 element' : ''}}
+      </p>
+    </div>
+  </section>
+  <section id="tetris" [ngStyle]="{'width.px': tetrisWidthSize, 'height.px': tetrisHeightSize}">
+    <div [ngStyle]="{'backgroundColor': element}" *ngFor="let element of gameState.board"></div>
+  </section>
+</section>
