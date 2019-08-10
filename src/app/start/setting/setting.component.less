@@ -1,0 +1,83 @@
+.introduction {
+    width: 100vw;
+    height: 100vh;
+    background-color: yellow;
+    background-image: url("../../../assets/img/20707_funny_ants_playing_tetris.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.introduction_item {
+    border: .5rem solid #2D5B0F;
+    border-radius: 2.5rem;
+    width: 50vw;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.introduction_header {
+    font-size: 4rem;
+    text-align: center;
+}
+
+.introduction_label {
+    font-size: 1.8rem;
+}
+
+.introduction_input {
+    width: 5rem;
+    background-color: #AFCC5D;
+    border-color: transparent;
+    margin: 1rem;
+    &:focus {
+        border-color: #2D5B0F;
+        background-color: yellow;
+    }
+}
+
+.introduction_message {
+    height: 5rem;
+}
+
+.introduction_form-error {
+    font-size: 1.6rem;
+    text-align: center;
+
+}
+
+.introduction_text {
+    padding: 0.5rem;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.introduction_arrow{
+    padding-left: 2rem;
+}
+
+.introduction_button {
+    background-color: #2D5B0F;
+    color:#AFCC5D;
+    border-color: #AFCC5D   ;
+    font-size: 2rem;
+    padding: 1rem 3rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    &:disabled {
+        opacity: 0.2;
+    }
+}
+
+.introduction_message {
+    font-size: 2.5rem;
+    color: darkred;
+    padding-top: 1rem;
+}

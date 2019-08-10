@@ -1,3 +1,63 @@
-<p>
-  setting works!
-</p>
+<section class="introduction">
+    <article class="introduction_item">
+        <h2 class="introduction_header">Welcome in TETRIS</h2>
+
+        <form id="boardSize" class="introduction_inputContainer" [formGroup]="boardSize"
+            (ngSubmit)="onSubmit(boardSize.value)">
+            <label class="introduction_label">Choose the board width (10-20) *
+                <input formControlName="width" id="width" class="introduction_input" type="number" value="10" />
+            </label>
+            <br />
+            <label class="introduction_label">Choose the board height (10-20) *
+                <input formControlName="height" id="height" class="introduction_input" type="number" value="20" />
+            </label>
+            <div class="introduction_message">
+                <div *ngIf="boardSize.invalid && (boardSize.dirty || boardSize.touched)">
+                    <div class="introduction_form-error" *ngIf="(boardSize.get('height').touched && boardSize.get('height').errors?.required) ||
+                    (boardSize.get('width').touched && boardSize.get('width').errors?.required)">
+                        Setting the board
+                        <span
+                            *ngIf="boardSize.get('height').touched && boardSize.get('height').errors?.required">height</span>
+                        <span
+                            *ngIf="boardSize.get('width').touched && boardSize.get('height').touched && boardSize.get('width').errors?.required && boardSize.get('height').errors?.required">
+                            and </span>
+                        <span
+                            *ngIf="boardSize.get('width').touched && boardSize.get('width').errors?.required">width</span>
+                        is required
+                    </div>
+                    <div class="introduction_form-error"
+                        *ngIf="!boardSize.get('height').errors?.required && boardSize.get('height').errors?.min">
+                        Minimal height is 10 elements
+                    </div>
+                    <div class="introduction_form-error"
+                        *ngIf="!boardSize.get('width').errors?.required && boardSize.get('width').errors?.min">
+                        Minimal width is 10 elements
+                    </div>
+                    <div class="introduction_form-error"
+                        *ngIf="!boardSize.get('height').errors?.required && boardSize.get('height').errors?.max">
+                        Maximal height is 20 elements
+                    </div>
+                    <div class="introduction_form-error"
+                        *ngIf="!boardSize.get('width').errors?.required && boardSize.get('width').errors?.max">
+                        Maximal width is 20 elements
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div>
+            <p class="introduction_text">to rotate the element pres
+                <i class="material-icons introduction_arrow">keyboard_arrow_up</i>
+            </p>
+            <p class="introduction_text">to move the element to the right pres
+                <i class="material-icons introduction_arrow">keyboard_arrow_right</i>
+            </p>
+            <p class="introduction_text">to move the element to the left pres
+                <i class="material-icons introduction_arrow">keyboard_arrow_left</i>
+            </p>
+            <p class="introduction_text">to drop the element down pres
+                <i class="material-icons introduction_arrow">keyboard_arrow_down</i></p>
+        </div>
+        <button [disabled]="boardSize.invalid" class="introduction_button" type="submit" form="boardSize">PLAY</button>
+    </article>
+</section>

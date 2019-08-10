@@ -1,0 +1,91 @@
+.start {
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10em;
+    box-sizing: border-box;
+}
+
+.start_header, .start_tetris{
+    color: yellow;
+    font-weight: 900;
+}
+
+.start_header{
+    font-size: 4rem;
+    letter-spacing: 1rem;
+    word-spacing: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    animation-name: changeColor;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    animation-direction: alternate-reverse;
+}
+
+@keyframes changeColor {
+    0% {color: yellow;}
+    25% {color: lightgreen;}
+    50% {color: aqua;}
+    75% {color: violet;}
+    100% {color: pink;}
+}
+
+.start_tetris{
+    padding-top: 1em;
+    font-size: 8rem;
+    letter-spacing: 2rem;
+    font-family: 'tetris', Helvetica, sans-serif;
+    text-transform: uppercase;
+    animation-name: lightenHeader;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    animation-direction: alternate-reverse;
+}
+
+@keyframes lightenHeader {
+    0% {font-size: 80px;
+        text-shadow: 0 0 2.5rem pink;}
+    100% {font-size: 120px;
+        text-shadow: 0 0 12.5rem pink;}
+}
+
+.start_button{
+    background-color: #6AAB61;
+    border-color: grey;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    padding: 1rem 3rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    border-width: 1px;
+    transition: 0.2s;
+    line-height: 1;
+    width: auto;
+    letter-spacing: 1.5px;
+    min-width: 170px;
+    &:hover {
+
+        border-width: 2px;
+        background-color: rgb(195, 205, 50);
+        padding: 0.9rem 2.9rem;
+        border-color: green;
+        font-weight: 800;
+        line-height: 1;
+    }
+    &:active{
+        opacity: 0.7;
+        padding-top: 1rem;
+        padding-bottom: 0.8rem;
+        outline: none;
+        text-transform: italic;
+    }
+}
