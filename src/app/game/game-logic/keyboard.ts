@@ -1,13 +1,13 @@
-import { Subscription, Observable } from 'rxjs';
-
-import { State, Key } from './interfaces';
 import { SettingComponent } from '../../start/setting/setting.component';
+import { Router } from '@angular/router';
+
 import { rotateElement } from './actions';
-import { hideElement, showElement } from './html-renderer';
 import { checkLeftCollision, checkRightCollision, checkRotatedCollision } from './collision';
 import { changeIntervalFn } from './game';
+import { hideElement, showElement } from './html-renderer';
+import { State, Key } from './interfaces';
 
-export const changeDirection = (state: State, key: Key, gameInterval: Observable<number>, gameCounterSubscription: Subscription) => {
+export const changeDirection = (state: State, key: Key, router: Router) => {
     switch (key.code) {
         case 'ArrowLeft':
             if ((state.positionX >= 1) && (!checkLeftCollision(state))) {
@@ -35,15 +35,15 @@ export const changeDirection = (state: State, key: Key, gameInterval: Observable
             break;
 
         case 'ArrowDown':
-            gameCounterSubscription.unsubscribe();
-            changeIntervalFn(50, state, gameInterval, gameCounterSubscription);
+            state.gameCounterSubscription.unsubscribe();
+            changeIntervalFn(50, state, router);
             break;
     }
 }
 
-export const changeDirectionOpposite = (state: State, key: Key, gameInterval: Observable<number>, gameCounterSubscription: Subscription) => {
+export const changeDirectionOpposite = (state: State, key: Key, router: Router) => {
     switch (key.code) {
-        case 'ArrowLeft':
+        case 'ArrowRight':
             if ((state.positionX >= 1) && (!checkLeftCollision(state))) {
                 hideElement(state);
                 state.positionX -= 1;
@@ -51,7 +51,7 @@ export const changeDirectionOpposite = (state: State, key: Key, gameInterval: Ob
             }
             break;
 
-        case 'ArrowRight':
+        case 'ArrowLeft':
             if ((state.positionX < (SettingComponent.width - state.element[0].length)) && (!checkRightCollision(state))) {
                 hideElement(state);
                 state.positionX += 1;
@@ -70,8 +70,8 @@ export const changeDirectionOpposite = (state: State, key: Key, gameInterval: Ob
             break;
 
         case 'ArrowDown':
-            gameCounterSubscription.unsubscribe();
-            changeIntervalFn(50, state, gameInterval, gameCounterSubscription);
+            state.gameCounterSubscription.unsubscribe();
+            changeIntervalFn(50, state, router);
             break;
     }
 }

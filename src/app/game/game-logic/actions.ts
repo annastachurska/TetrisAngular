@@ -1,10 +1,13 @@
+import { Router } from '@angular/router';
+
 import { SettingComponent } from '../../start/setting/setting.component';
+import { TetrisComponent } from '../tetris/tetris.component';
+
 import { empty, brick } from './constants';
 import { State } from './interfaces';
-import { index, setNewState } from './game';
+import { setNewState } from './game';
 import { hideElement, showElement, colorBoard } from './html-renderer';
 import { checkCollisionWithMatrix } from './collision';
-import { Subscription } from 'rxjs';
 
 export const createMatrix = () => {
     return Array(SettingComponent.height).fill(empty).map(el => Array(SettingComponent.width).fill(empty));
@@ -29,13 +32,13 @@ export const detonateBomb = (state: State) => {
 
 export const rotateElement = (state: State) => {
     const rotatedElement = [];
-    state.element.forEach((row, rowi) => {
+    for (let i = 0; i < state.element[0].length; i++) {
         let rotatedElementLine = [];
         for (let j = state.element.length - 1; j >= 0; j--) {
-            rotatedElementLine.push(state.element[j][rowi]);
+            rotatedElementLine.push(state.element[j][i]);
         }
         rotatedElement.push(rotatedElementLine);
-    });
+    }
     return rotatedElement;
 }
 
@@ -49,7 +52,7 @@ export const addElementToMatrix = (state: State) => {
     });
 }
 
-export const moveElement = (state: State, sub: Subscription) => {
+export const moveElement = (state: State, router: Router) => {
     if (((state.positionY + 1) <= SettingComponent.height - state.element.length) && (!checkCollisionWithMatrix(state))) {
         hideElement(state);
         state.positionY += 1;
@@ -57,7 +60,7 @@ export const moveElement = (state: State, sub: Subscription) => {
     } else {
         if (state.positionY === 0) {
             state.isFinished = true;
-            finishGame(sub);
+            finishGame(state, router);
         }
 
         if (state.elementNumber === 8) {
@@ -70,34 +73,35 @@ export const moveElement = (state: State, sub: Subscription) => {
     }
 }
 
-const finishGame = (sub: Subscription) => {
-    sub.unsubscribe();
-    
-  }
+const finishGame = (state: State, router: Router) => {
+    state.gameCounterSubscription.unsubscribe();
+    router.navigate(['finish']);
+    TetrisComponent.finalPoints = state.points;
+}
 
 export const removeCompleteRows = (state: State) => {
     const toRemove = [];
-    const newMatrix = [];
-    state.matrix.forEach((row, rowi) => {
-        let sum = row.reduce((prev, next) => { return prev + next });
-        if (sum === row.length) {
+    const newMatrix =[];
+
+    for (let i=0; i<state.matrix.length; i++) {
+        let sum = state.matrix[i].reduce((prev, next) => {return prev + next});
+        if (sum == state.matrix[i].length) {
             toRemove.push(1);
-            let newMatrixRaw = new Array(this.width).fill(0);
+            let newMatrixRaw = new Array(SettingComponent.width).fill(0);
             newMatrix.push(newMatrixRaw);
             state.points++;
         } else {
             toRemove.push(0);
         }
-    });
+    }
 
-    let numberOfCompleteRows = toRemove.reduce((prev, next) => { return prev + next });
-    if (numberOfCompleteRows > 0) {
-        for (let i = 0; i < this.matrix.length; i++) {
-            if (toRemove[i] === 0) {
+    let numberOfCompleteRows = toRemove.reduce((prev, next) => {return prev + next});
+    if (numberOfCompleteRows>0) {
+        for (let i=0; i<state.matrix.length; i++) {
+            if (toRemove[i] == 0) {
                 newMatrix.push(state.matrix[i]);
             }
         }
-
         state.matrix = newMatrix;
         colorBoard(state);
     }

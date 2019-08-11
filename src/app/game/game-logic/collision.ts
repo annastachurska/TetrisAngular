@@ -1,28 +1,27 @@
-import { State } from './interfaces';
 import { rotateElement } from './actions';
 import { brick } from './constants';
+import { State } from './interfaces';
 
 export const checkRotatedCollision = (state: State) => {
     let rotated = rotateElement(state);
-    rotated.forEach((row, rowi) => {
-        row.forEach((col, coli) => {
-            if ((rotated[coli][rowi] === brick) && (state.matrix[state.positionY + coli][state.positionX + rowi] === brick)) {
+    for (let j = rotated.length - 1; j >= 0; j--) {
+        for (let i = 0; i < rotated[j].length; i++) {
+            if ((rotated[j][i] == 1) && (state.matrix[state.positionY + j][state.positionX + i] == 1)) {
                 return true;
             }
-        });
-    });
+        }
+    }
     return false;
 }
 
 export const checkLeftCollision = (state: State) => {
-    state.element.forEach((row, rowi) => {
-        row.forEach((col, coli) => {
-            if ((state.element[coli][rowi] === brick)
-                && (state.matrix[state.positionY + coli][state.positionX + rowi - 1] === brick)) {
+    for (let j = state.element.length - 1; j >= 0; j--) {
+        for (let i = 0; i < state.element[j].length; i++) {
+            if ((state.element[j][i] === brick) && (state.matrix[state.positionY + j][state.positionX + i - 1] === brick)) {
                 return true;
             }
-        });
-    });
+        }
+    }
     return false;
 }
 

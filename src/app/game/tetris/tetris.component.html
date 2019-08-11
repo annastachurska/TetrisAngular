@@ -6,11 +6,11 @@
     <div class="tetris_button_container">
       <h2 class="tetris_button_container_title">Magic buttons</h2>
       <button class="tetris_button tetris_rotate"
-        (click)="handleRotateButton()">{{isRotateBtnClicked ? 'Tetris rotated' : 'Rotate tetris'}}</button>
+        (click)="handleRotateButton()">{{gameState.isRotateBtnClicked ? 'Tetris rotated' : 'Rotate tetris'}}</button>
       <button class="tetris_button tetris_keys"
-        (click)="handleChageKeysButton()">{{isSwitchedSideKeys ? 'Sides are switched' : 'Switch sides'}}</button>
+        (click)="handleChageKeysButton()">{{gameState.isSwitchedSideKeys ? 'Sides are switched' : 'Switch sides'}}</button>
       <button [disabled]="slowDownTimesToUse === 0" class="tetris_button tetris_slowDown"
-        (click)="handleSlowDownButton()">Slow down</button>
+        (click)="handleSlowDownButton()">Slow down ({{gameState.slowDownTimesToUse}} to use) </button>
     </div>
     <div class="tetrisInfo">
       <p class="tetrisInfo_text">
@@ -19,7 +19,8 @@
       </p>
     </div>
   </section>
-  <section id="tetris" [ngStyle]="{'width.px': tetrisWidthSize, 'height.px': tetrisHeightSize}">
+  <section id="tetris"
+    [ngStyle]="{'width.px': tetrisWidthSize, 'height.px': tetrisHeightSize, 'transform': rotateStyle}">
     <div [ngStyle]="{'backgroundColor': element}" *ngFor="let element of gameState.board"></div>
   </section>
 </section>
