@@ -1,4 +1,3 @@
-import { rotateElement } from './actions';
 import { brick } from './constants';
 import { State } from './interfaces';
 
@@ -45,4 +44,16 @@ export const checkCollisionWithMatrix = (state: State) => {
         }
     }
     return false;
+}
+
+export const rotateElement = (state: State) => {
+    const rotatedElement = [];
+    for (let i = 0; i < state.element[0].length; i++) {
+        let rotatedElementLine = [];
+        for (let j = state.element.length - 1; j >= 0; j--) {
+            rotatedElementLine.push(state.element[j][i]);
+        }
+        rotatedElement.push(rotatedElementLine);
+    }
+    return rotatedElement;
 }

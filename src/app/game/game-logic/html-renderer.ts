@@ -1,22 +1,8 @@
 import { SettingComponent } from '../../start/setting/setting.component';
 import { State } from './interfaces';
 import { brick, empty } from './constants';
-import { index } from './game';
 
-export const showElement = (state: State) => {
-    state.element.forEach((row, rowi) => {
-        row.forEach((col, coli) => {
-            if (state.element[rowi][coli] === brick) {
-                let element = index(coli + state.positionX, rowi + state.positionY);
-                if (state.elementNumber === 8) {
-                    state.board[element] = 'red';
-                } else {
-                    state.board[element] = 'black';
-                }
-            }
-        });
-    });
-}
+import { index } from './game';
 
 export const hideElement = (state: State) => {
     state.element.forEach((row, rowi) => {

@@ -1,11 +1,11 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SettingComponent } from 'src/app/start/setting/setting.component';
-import { createMatrix, moveElement } from '../game-logic/actions';
-import { setStartingElement, changeIntervalFn } from '../game-logic/game';
-import { showElement, createBoard } from '../game-logic/html-renderer';
 import { State } from '../game-logic/interfaces';
+
+import { createMatrix, setStartingElement, changeIntervalFn, showElement } from '../game-logic/actions';
+import { createBoard } from '../game-logic/html-renderer';
 import { changeDirectionOpposite, changeDirection } from '../game-logic/keyboard';
 
 @Component({
@@ -13,7 +13,7 @@ import { changeDirectionOpposite, changeDirection } from '../game-logic/keyboard
   templateUrl: './tetris.component.html',
   styleUrls: ['./tetris.component.less']
 })
-export class TetrisComponent implements OnInit {
+export class TetrisComponent implements OnInit, OnDestroy {
   static finalPoints: number = -1;
 
   tetrisWidthSize: number = 200;
@@ -52,6 +52,11 @@ export class TetrisComponent implements OnInit {
 
   ngOnInit() {
     this.startGame();
+
+  }
+
+  ngOnDestroy() {
+    TetrisComponent.finalPoints = this.gameState.points;
   }
 
   startGame() {
@@ -81,5 +86,8 @@ export class TetrisComponent implements OnInit {
     changeIntervalFn(1000, this.gameState, this.router);
     // e.target.disabled = true;
   }
+
 }
+
+
 

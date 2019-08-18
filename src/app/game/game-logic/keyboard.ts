@@ -1,11 +1,11 @@
-import { SettingComponent } from '../../start/setting/setting.component';
 import { Router } from '@angular/router';
 
-import { rotateElement } from './actions';
-import { checkLeftCollision, checkRightCollision, checkRotatedCollision } from './collision';
-import { changeIntervalFn } from './game';
-import { hideElement, showElement } from './html-renderer';
+import { SettingComponent } from '../../start/setting/setting.component';
 import { State, Key } from './interfaces';
+
+import { rotateElement, checkLeftCollision, checkRightCollision, checkRotatedCollision } from './collision';
+import { changeIntervalFn, showElement } from './actions';
+import { hideElement } from './html-renderer';
 
 export const changeDirection = (state: State, key: Key, router: Router) => {
     switch (key.code) {
