@@ -80,13 +80,11 @@ export class TetrisComponent implements OnInit, OnDestroy {
     this.gameState.isSwitchedSideKeys = this.gameState.isSwitchedSideKeys == false ? true : false;
   }
 
-  handleSlowDownButton($event: Event) {
+  handleSlowDownButton() {
     this.gameState.slowDownTimesToUse--;
     this.gameState.gameCounterSubscription.unsubscribe();
     changeIntervalFn(1000, this.gameState, this.router);
-    // e.target.disabled = true;
   }
-
 }
 
 

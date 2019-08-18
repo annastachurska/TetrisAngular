@@ -9,7 +9,7 @@
         (click)="handleRotateButton()">{{gameState.isRotateBtnClicked ? 'Tetris rotated' : 'Rotate tetris'}}</button>
       <button class="tetris_button tetris_keys"
         (click)="handleChageKeysButton()">{{gameState.isSwitchedSideKeys ? 'Sides are switched' : 'Switch sides'}}</button>
-      <button [disabled]="slowDownTimesToUse === 0" class="tetris_button tetris_slowDown"
+      <button [disabled]="gameState.slowDownTimesToUse === 0" class="tetris_button tetris_slowDown"
         (click)="handleSlowDownButton()">Slow down ({{gameState.slowDownTimesToUse}} to use) </button>
     </div>
     <div class="tetrisInfo">
